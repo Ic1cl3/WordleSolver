@@ -1,4 +1,4 @@
-## Use this to process word files into usable wordlists (answer and option files) that have exactly 1 word per line.
+# Use this to process word files into usable wordlists (answer and option files) that have exactly 1 word per line.
 
 words = open("WordList.txt", "r")
 new = open("Answers.txt", "w")
