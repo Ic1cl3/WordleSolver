@@ -1,9 +1,17 @@
 import infos
 
-def guess(gameSize : int, answers : list[str], options : list[str], information : dict[str, infos.info]) -> None:
+def guess(gameSize : int, answers : list[str], options : list[str], information : dict[str, infos.info]) -> str:
     """
     Main function to guess words.
     """
+    bestOption : str = ""
+    bestImperfection : int = -1
+    for option in options:
+        imperfection : int = getGuessImperfection(option, answers, information)
+        if bestImperfection == -1 or imperfection < bestImperfection:
+            bestOption = option
+            bestImperfection = imperfection
+    return bestOption
 
 def filterAnswers(answers : list[str], information : dict[str, infos.info]) -> list[str]:
     possibleAnswers : list[str] = answers.copy()
