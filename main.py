@@ -1,5 +1,6 @@
 import yaml
 import infos
+import wordGuesser
 
 
 answers : list[str] = []
@@ -60,3 +61,6 @@ def openWords() -> bool:
             return False
 
     return True
+
+print(openWords())
+wordGuesser.guess(gameSize, answers, options, alphabet)

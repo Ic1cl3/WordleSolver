@@ -15,17 +15,17 @@ def guess(gameSize : int, answers : list[str], options : list[str], information 
 
 def filterAnswers(answers : list[str], information : dict[str, infos.info]) -> list[str]:
     possibleAnswers : list[str] = answers.copy()
-
     for answer in answers:
         for charI in range(len(answer)):
-            char = answer[charI]
-            if information[char] is infos.infopartial:
+            char = answer[charI].upper()
+            if information[char].__class__ is infos.infopartial:
                 if charI in information[char].falseIndicies:
                     possibleAnswers.remove(answer)
-            if information[char] is infos.infofull:
+                    break
+            if information[char].__class__ is infos.infofull:
                 if information[char].index != charI:
                     possibleAnswers.remove(answer)
-    
+                    break
     return possibleAnswers
 
 def getGuessImperfection(guess : str, answers : list[str], information : dict[str, infos.info]) -> int:
@@ -40,7 +40,7 @@ def getGuessImperfection(guess : str, answers : list[str], information : dict[st
     for maskI in range(len(possibleMasks)):
         mask = possibleMasks[maskI]
         for charI in range(len(mask)):
-            char = guess[charI]
+            char = guess[charI].upper()
             if mask[charI] == "0":
                 possibleInfos[maskI][char] = infos.infofull(-1)
             elif mask[charI] == "1":
@@ -51,6 +51,7 @@ def getGuessImperfection(guess : str, answers : list[str], information : dict[st
     for possibleInfo in possibleInfos:
         possibleAnswers : list[str] = filterAnswers(answers, possibleInfo)
         score += abs((1/possibleResults) - (len(possibleAnswers) / poolSize))
+    print(str(score) + " " + guess)
     return score
 
 def getBaseThreeList(length : int) -> list[str]:
