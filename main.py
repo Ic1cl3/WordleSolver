@@ -63,4 +63,4 @@ def openWords() -> bool:
     return True
 
 print(openWords())
-wordGuesser.guess(gameSize, answers, options, alphabet)
+print(wordGuesser.guess(gameSize, answers, options, alphabet))
