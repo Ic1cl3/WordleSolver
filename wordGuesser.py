@@ -32,6 +32,8 @@ def getGuessImperfection(guess : str, answers : list[str], information : dict[st
     """
     Returns an imperfection score for the guess based on the information known about the letters.
     """
+    print("Guessing: " + guess)
+    guess = guess.upper()
     score : float = 0.0
     poolSize : float = len(answers)
     possibleResults : int = 3 ** len(guess)
@@ -50,8 +52,8 @@ def getGuessImperfection(guess : str, answers : list[str], information : dict[st
                 possibleInfos[maskI][char] = infos.infofull(charI)
     for possibleInfo in possibleInfos:
         possibleAnswers : list[str] = filterAnswers(answers, possibleInfo)
-        score += abs((1/possibleResults) - (len(possibleAnswers) / poolSize))
-    print(str(score) + " " + guess)
+        score += abs((1/possibleResults) - (len(possibleAnswers) / float(poolSize)))
+    print("Completed. Imperfection: " + str(score))
     return score
 
 def getBaseThreeList(length : int) -> list[str]:
